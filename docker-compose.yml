@@ -1,0 +1,13 @@
+version: "3" # Docekr Compose 파일의 버전 지정
+services:
+  db:
+    image: postgres:latest # 사용할 PostgreSQL 이미지를 지정 (최신으로 지정)
+    container_name: postrgres_sequelize_container # 컨테이너의 이름을 지정
+    restart: always # 컨테이너가 종료되었을 때 자동으로 재시작
+    ports:
+      - "5432:5432" # 호스트의 5432 포트를 컨테이너의 5432 포트에 매핑
+    environment:
+      POSTGRES_USER: "postgres" # PostgreSQL 데이터베이스의 사용자 이름을 지정
+      POSTGRES_PASSWORD: "password" # PostgreSQL 데이터베이스의 비밀번호를 지정
+    volumes:
+      - ./data:/var/lib/postgresql/data # 호스트의 ./data 디렉터리를 컨테이너의 /var/lib/postgresql/data 디렉터리에 마운트 (이렇게 하는 이유는 컨테이너가 종료되어도 데이터를 유지하기 위함)
